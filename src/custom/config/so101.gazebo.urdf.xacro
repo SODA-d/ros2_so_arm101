@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="so101">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import so101 urdf file -->
+    <xacro:include filename="$(find so_arm101_description)/urdf/so_arm101.urdf" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="so101.gazebo.ros2_control.xacro" />
+
+
+    <xacro:so101_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+        
+    <gazebo>
+        <joint name="world_joint" type="fixed">
+            <parent>world</parent>
+            <child>base_link</child>
+        </joint>
+        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find custom)/config/ros2_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+    <gazebo reference="moving_jaw_so101_v1_link">
+        <mu1>20.0</mu1>
+        <mu2>20.0</mu2>
+        <kp>30000</kp>
+        <kd>15</kd>
+    </gazebo>
+
+    <gazebo reference="gripper_frame_link">
+        <mu1>20.0</mu1>
+        <mu2>20.0</mu2>
+        <kp>30000</kp>
+        <kd>15</kd>
+    </gazebo>
+
+
+</robot>
