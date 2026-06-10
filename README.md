@@ -55,6 +55,7 @@ python3 mujoco_simulation/so101_real_control.py
 
 ## Thanks
 [https://github.com/LitchiCheng/mujoco-learning](https://github.com/LitchiCheng/mujoco-learning)
+
 [https://github.com/fishros/install](https://github.com/fishros/install)
 
 ## Next Steps
