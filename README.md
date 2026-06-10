@@ -42,6 +42,21 @@ source install/setup.bash
 ros2 launch custom gazebo.launch.py
 ```
 
+### 2. MuJoCo simulation
+```bash
+cd ros2_so_arm101
+python3 mujoco_simulation/mujoco_control_client.py
+```
+### 3. sim2real
+```bash
+cd ros2_so_arm101
+python3 mujoco_simulation/so101_real_control.py
+```
+
+## Thanks
+[https://github.com/LitchiCheng/mujoco-learning](https://github.com/LitchiCheng/mujoco-learning)
+
+
 ## Next Steps
 
-**Add Hardware Support**
+**RL Training**
