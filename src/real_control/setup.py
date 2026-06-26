@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'simulation_mujoco'
+package_name = 'real_control'
 
 setup(
     name=package_name,
@@ -24,7 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'mujoco_viewer=simulation_mujoco.mujoco_viewer:main'
+            'arm_controller=real_control.arm_controller:main'
         ],
     },
 )

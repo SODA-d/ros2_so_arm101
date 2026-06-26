@@ -3,8 +3,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import JointState
 import mujoco
 import mujoco.viewer
-import numpy as np
-import glfw
+from ament_index_python.packages import get_package_share_directory
 
 class JointStateSubscriber(Node):
     def __init__(self,node_name):
@@ -15,11 +14,12 @@ class JointStateSubscriber(Node):
             self.JointStateCallback,
             10
         )
-        self.model = mujoco.MjModel.from_xml_path('/home/ros-24/ros2_so_arm101/src/so_arm101_description/mjcf/scene.xml')
+        model_path = get_package_share_directory('so_arm101_description')
+        self.model = mujoco.MjModel.from_xml_path(model_path + '/mjcf/scene.xml')
         self.data = mujoco.MjData(self.model)
         self.handle_mujoco = mujoco.viewer.launch_passive(self.model, self.data)
 
-        self.timer1 = self.create_timer(
+        self.timer = self.create_timer(
             0.01,  # 100ms周期
             self.TimerCallback
         )
@@ -29,6 +29,8 @@ class JointStateSubscriber(Node):
         # mujoco.mj_forward(self.model, self.data)
         # self.end_effector_pos = self.data.body(self.end_effector_id).xpos
         # 设置关节目标位置
+        if not hasattr(self, "positions"):
+            return
         self.data.qpos[:6] = self.positions
         # 模拟一步
         mujoco.mj_step(self.model, self.data)
