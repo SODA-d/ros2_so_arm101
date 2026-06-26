@@ -25,16 +25,10 @@ class JointStateSubscriber(Node):
         )
 
     def TimerCallback(self):
-        #获取当前末端执行器位置
-        # mujoco.mj_forward(self.model, self.data)
-        # self.end_effector_pos = self.data.body(self.end_effector_id).xpos
-        # 设置关节目标位置
         if not hasattr(self, "positions"):
             return
         self.data.qpos[:6] = self.positions
-        # 模拟一步
         mujoco.mj_step(self.model, self.data)
-        # 更新渲染场景
         self.handle_mujoco.sync()
 
     # 处理接收到的关机位置信息
@@ -42,8 +36,7 @@ class JointStateSubscriber(Node):
         JOINT_ORDER = ["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll", "gripper"]
         name_to_pos = dict(zip(msg.name, msg.position))
         self.positions = [name_to_pos[name] for name in JOINT_ORDER]
-        for name, pos in zip(JOINT_ORDER, self.positions):
-            self.get_logger().info(f"{name}: {pos:.4f}")
+
     #节点结束，清理mujoco窗口
     def cleanup(self):
         self.handle_mujoco.close()
