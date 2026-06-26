@@ -38,6 +38,8 @@ class JointStateSubscriber(Node):
         JOINT_ORDER = ["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll", "gripper"]
         name_to_pos = dict(zip(msg.name, msg.position))
         self.positions_deg = [math.degrees(name_to_pos[name]) for name in JOINT_ORDER]
+        self.positions_deg[1] = self.positions_deg[1] - 90
+        self.positions_deg[2] = self.positions_deg[2] + 90
 
 
     def cleanup(self):
