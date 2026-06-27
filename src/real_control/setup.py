@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'arm_controller=real_control.arm_controller:main'
+            'arm_controller=real_control.arm_controller:main',
+            'real2sim=real_control.real2sim_controller:main'
         ],
     },
 )
