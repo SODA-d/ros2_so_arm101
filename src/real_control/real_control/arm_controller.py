@@ -26,12 +26,12 @@ class JointStateSubscriber(Node):
             return
         for i in range(1, 7):
             self.motor.setMotorId(i)
-            self.motor.setSpeed(2000)  # 设置目标速度为1000步/秒
-            self.motor.printFlag(False)  # 打开打印
+            self.motor.setSpeed(2000) 
+            self.motor.printFlag(False)  
             if i == 1 or i == 2:
                 self.motor.setPID(16, 16, 0)
             else:   
-                self.motor.setPID(32, 32, 0)  # 设置PID参数
+                self.motor.setPID(32, 32, 0)  
             self.motor.setPosition(self.positions_deg[i - 1])
 
     def JointStateCallback(self, msg: JointState):
