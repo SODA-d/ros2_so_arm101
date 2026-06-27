@@ -41,6 +41,9 @@ class JointStateSubscriber(Node):
 
 
     def cleanup(self):
+        for i in range(1,7):
+            self.motor.setMotorId(i)
+            self.motor.setTorqueEnable(0)
         self.motor.disconnect()
 
 def main(args=None):
