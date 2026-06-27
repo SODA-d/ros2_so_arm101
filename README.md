@@ -37,21 +37,31 @@ source install/setup.bash
 
 ## Run
 
-### 1.  Gazebo Simulation and MoveIt RViz
+### 1.  Mujoco Simulation and MoveIt RViz
 ```bash
-ros2 launch custom gazebo.launch.py
+ros2 launch robot_bringup robot_bringup.launch.py
+```
+Standalone ROS 2 Node Control
+```bash
+ros2 run real_control arm_controller  # sim2real
+ros2 run real_control real2sim  # real2sim
+ros2 run real_control bidirectional_teleoperation  # sim2real or real2sim
 ```
 
-### 2. MuJoCo simulation
+### 2. MuJoCo simulation To Real_robot
 ```bash
-cd ros2_so_arm101
-python3 mujoco_simulation/mujoco_control_client.py
+ros2 launch robot_bringup robot_bringup.launch.py sim2real:=true
 ```
-### 3. sim2real
+### 3. MuJoCo simulation To Real_robot
 ```bash
-cd ros2_so_arm101
-python3 mujoco_simulation/so101_real_control.py
+ros2 launch robot_bringup robot_bringup.launch.py real2sim:=true
 ```
+
+### 4. Press 'q' to switch between Sim2Real and Real2Sim
+```bash
+ros2 launch robot_bringup robot_bringup.launch.py BiTeleoperation:=true
+```
+
 
 ## Thanks
 [https://github.com/LitchiCheng/mujoco-learning](https://github.com/LitchiCheng/mujoco-learning)
