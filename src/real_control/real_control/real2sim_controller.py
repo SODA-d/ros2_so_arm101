@@ -26,10 +26,6 @@ class JointStateSubscriber(Node):
             self.send_command
         )
         self.positions_rad = [0,0,0,0,0,0]
-    def TimerCallback(self):
-        for i in range(1, 7):
-            self.motor.setMotorId(i)
-            self.positions_rad[i-1] = math.radians(self.motor.getPosition())
 
     def send_command(self):
         for i in range(1, 7):

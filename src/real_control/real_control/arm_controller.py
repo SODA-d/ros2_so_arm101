@@ -18,10 +18,10 @@ class JointStateSubscriber(Node):
         )
         self.timer = self.create_timer(
             0.01, 
-            self.TimerCallback
+            self.send_command
         )
 
-    def TimerCallback(self):
+    def send_command(self):
         if not hasattr(self, "positions_deg"):
             return
         for i in range(1, 7):
