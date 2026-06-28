@@ -48,9 +48,11 @@ class JointStateSubscriber(Node):
         hand_point = JointTrajectoryPoint()
 
         arm_point.positions = self.positions_rad[:5]
-        arm_point.time_from_start.sec = 2
+        arm_point.time_from_start.sec = 0
+        arm_point.time_from_start.nanosec = 10_000_000
         hand_point.positions = self.positions_rad[-1:]
-        hand_point.time_from_start.sec = 2
+        hand_point.time_from_start.sec = 0
+        hand_point.time_from_start.nanosec = 10_000_000
 
 
         arm_msg.points.append(arm_point)
