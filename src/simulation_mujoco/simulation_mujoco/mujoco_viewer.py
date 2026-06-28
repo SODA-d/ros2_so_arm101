@@ -20,7 +20,7 @@ class JointStateSubscriber(Node):
         self.handle_mujoco = mujoco.viewer.launch_passive(self.model, self.data)
 
         self.timer = self.create_timer(
-            0.01,  # 100ms周期
+            0.01,  
             self.TimerCallback
         )
 
@@ -31,13 +31,13 @@ class JointStateSubscriber(Node):
         mujoco.mj_step(self.model, self.data)
         self.handle_mujoco.sync()
 
-    # 处理接收到的关机位置信息
+    
     def JointStateCallback(self, msg: JointState):
         JOINT_ORDER = ["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll", "gripper"]
         name_to_pos = dict(zip(msg.name, msg.position))
         self.positions = [name_to_pos[name] for name in JOINT_ORDER]
 
-    #节点结束，清理mujoco窗口
+    
     def cleanup(self):
         self.handle_mujoco.close()
 
